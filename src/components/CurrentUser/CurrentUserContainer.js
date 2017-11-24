@@ -13,7 +13,9 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch)=>{
     return {
-        updateStatus:({target:{value}})=>
+        updateStatus:({target:{value}})=>{
+            console.log("Updating status...",value);
+        }
     }
 };
 
