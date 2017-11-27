@@ -16,6 +16,8 @@ import {
     users
 } from './db/User';
 
+import {handleRender} from './serverRenderMiddleware';
+
 let app = express();
 const server = http.createServer(app);
 
@@ -110,8 +112,9 @@ app.use('/input/submit/:userID/:channelID/:messageID/:input',({params:{userID,ch
     res.status(300).send();
 });
 
-app.use(express.static('public'));
 app.use(express.static('public/css'));
+
+app.use('/',handleRender(()=>getDefaultState(currentUser)));
 
 const port = 9000;
 server.listen(port,()=>{

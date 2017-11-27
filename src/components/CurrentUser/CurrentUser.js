@@ -1,7 +1,7 @@
 import React from 'react';
 import {ONLINE, OFFLINE, AWAY} from '../../actions';
 
-export const CurrentUser = ({name, status, id, updateStatus})=>{
+export const CurrentUser = ({name, status, id, updateStatus})=>(
     <div>
         <div>
             <h3>
@@ -17,4 +17,4 @@ export const CurrentUser = ({name, status, id, updateStatus})=>{
         </div>
     </div>
     
-};
+);
