@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable'
+import { fromJS } from 'immutable';
 
 import {
     User,
@@ -30,7 +30,7 @@ export const getDefaultState = (currentUser)=>{
                 messages:[],
                 fetchStatus:`NOT_FETCHED`,
                 participants:channel.participants
-            }
+            };
         }
     });
 

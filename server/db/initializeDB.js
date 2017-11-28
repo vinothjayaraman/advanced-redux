@@ -1,7 +1,7 @@
 import {
     channels,
     users
-} from './'
+} from './';
 
 import {
     template
@@ -51,7 +51,7 @@ export const initializeDB = ()=>{
             channels:[],
             fetchStatus:`FETCHED`,
             status:chance.pick([`ONLINE`,`OFFLINE`,`AWAY`])
-        })
+        });
     }
 
     let contactCount = 6;
@@ -66,7 +66,7 @@ export const initializeDB = ()=>{
         const messages = [];
         for (let i = count; i > 0; i--) {
             messages.push(getRandomMessage(userIDs));
-        };
+        }
         return messages;
     };
 
@@ -76,7 +76,7 @@ export const initializeDB = ()=>{
             name:`${user.name}'s Private Channel`,
             participants:[user.id],
             messages:getMessages([user.id])
-        })
+        });
     });
 
     users.forEach(user=>{
@@ -86,7 +86,7 @@ export const initializeDB = ()=>{
             name:`${user.name} and ${user2.name}'s Private Chat`,
             participants:[user.id,user2.id],
             messages:getMessages([user.id,user2.id])
-        })
+        });
     });
 
     channels.push({

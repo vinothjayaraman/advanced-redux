@@ -6,4 +6,4 @@ export const Channel = (id)=>{
         throw new Error(`Could not find channel with ID ${id}`);
     }
     return channel;
-}
+};

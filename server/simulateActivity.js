@@ -1,12 +1,12 @@
 import {
     createMessage
-} from './server'
+} from './server';
 
 import {
     channels,
     users,
     getRandomMessageText
-} from './db'
+} from './db';
 
 import {
     chance
@@ -24,7 +24,7 @@ const simulateCreateMessage=(user)=>{
         const channel = chance.pick(channels.filter(channel=>channel.participants.includes(user)));
         const channelID = channel.id;
         const userID = chance.pick(channel.participants);
-        createMessage({userID,channelID,messageID,input})
+        createMessage({userID,channelID,messageID,input});
     }
 };
 

@@ -10,7 +10,7 @@ import {reducer} from '../src/reducers';
 const readModuleFile = (path,callback) => {
     try {
         const fileName = require.resolve(path);
-        fs.readFile(fileName,'utf8',callback)
+        fs.readFile(fileName,'utf8',callback);
     } catch (e) {
         callback(e);
     }

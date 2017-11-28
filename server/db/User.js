@@ -6,4 +6,4 @@ export const User = (id)=>{
         throw new Error(`Could not find user with ID ${id}`);
     }
     return user;
-}
+};

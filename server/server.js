@@ -2,7 +2,7 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import webpack from 'webpack';
-import webpackConfig from './../webpack.config'
+import webpackConfig from './../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 const compiler = webpack(webpackConfig);
 import webpackHotMiddleware from "webpack-hot-middleware";
@@ -35,7 +35,7 @@ app.use(webpackHotMiddleware(compiler, {
     'heartbeat': 10 * 1000
 }));
 
-import { getDefaultState } from './getDefaultState'
+import { getDefaultState } from './getDefaultState';
 import { initializeDB } from './db/initializeDB';
 
 initializeDB();
