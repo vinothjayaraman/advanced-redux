@@ -1,6 +1,6 @@
-import {createSelecor} from 'reselect';
+import {createSelector} from 'reselect';
 
-export const currentUserSelector = createSelecor(
+export const currentUserSelector = createSelector(
     state=>state.get(`currentUser`),
     currentUser=>currentUser
 );

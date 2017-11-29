@@ -3,7 +3,7 @@ import {
     applyMiddleware,
     compose
 } from 'redux';
-import {fromJS} from 'immutable';
+import thunk from 'redux-thunk';
 import {createSocketMiddleware} from './socketMiddleware';
 import {users} from '../server/db';
 import {RECEIVE_MESSAGE} from './actions';
@@ -37,6 +37,7 @@ const logger = createLogger({
 
 const enhancer = compose(
     applyMiddleware(
+        thunk,
         socketMiddleware,
         logger
     )

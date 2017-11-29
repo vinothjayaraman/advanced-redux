@@ -1,22 +1,26 @@
-import {connect} from 'react-redux';
-import {CurrentUser} from './CurrentUser';
+import React from 'react';
+import { connect } from 'react-redux';
+import { updateStatus } from './../../actions';
+import { CurrentUser } from './CurrentUser';
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
     const currentUser = state.get(`currentUser`);
-
     return {
-        name: currentUser.get(`name`),
-        status: currentUser.get(`status`),
+        name:currentUser.get(`name`),
+        status:currentUser.get(`status`),
         id:currentUser.get(`id`)
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return {
-        updateStatus:({target:{value}})=>{
-            console.log("Updating status...",value);
+        updateStatus: ({target:{value}}) => {
+            dispatch(updateStatus(value));
         }
-    }
+    };
 };
 
-export const CurrentUserContainer = connect(mapStateToProps,mapDispatchToProps)(CurrentUser);
+export const CurrentUserContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CurrentUser);
