@@ -1,14 +1,14 @@
-import { chance } from './../utility'
+import { chance } from './../utility';
 
 import {
     setActiveChannel,
     requestCreateChannel
-} from './'
+} from './';
 
 import {
     currentUserSelector,
     userSelector
-} from './../selectors'
+} from './../selectors';
 
 export const openContactChannel = (id)=>(dispatch, getState)=>{
     const state = getState();

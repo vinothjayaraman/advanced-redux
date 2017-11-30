@@ -5,14 +5,14 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import {createSocketMiddleware} from './socketMiddleware';
-import {users} from '../server/db';
+//import {users} from '../server/db';
 import {RECEIVE_MESSAGE} from './actions';
 const io = window.io;
-import {getDefaultState} from '../server/getDefaultState';
 import {initializeDB} from '../server/db/initializeDB';
 import {createLogger} from 'redux-logger';
 import {getPreloadedState} from './getPreloadedState';
-
+import createSagaMiddleware from 'redux-saga';
+import {currentUserStatusSaga} from './sagas/currentUserStatusSaga';
 const socketConfigOut = {
     UPDATE_STATUS:(data)=>({
         type: `UPDATE_USER_STATUS`,
@@ -20,13 +20,14 @@ const socketConfigOut = {
     })
 };
 
+const sagaMiddleware = createSagaMiddleware();
 const socketMiddleware = createSocketMiddleware(io) (socketConfigOut);
 
 initializeDB();
 
 import {reducer} from './reducers';
 
-const currentUser = users[0];
+//const currentUser = users[0];
 //const defaultState = getDefaultState(currentUser);
 
 //console.log(defaultState);
@@ -37,6 +38,7 @@ const logger = createLogger({
 
 const enhancer = compose(
     applyMiddleware(
+        sagaMiddleware,
         thunk,
         socketMiddleware,
         logger
@@ -55,7 +57,8 @@ const socket = io();
 for (const key in socketConfigIn) {
         socket.on(key,data=>{
             store.dispatch(socketConfigIn[key](data));
-        })
+        });
 }
 
 export const getStore = ()=>store;
+sagaMiddleware.run(currentUserStatusSaga);
