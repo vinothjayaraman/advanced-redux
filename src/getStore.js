@@ -3,6 +3,7 @@ import {
     applyMiddleware,
     compose
 } from 'redux';
+export {DevTools} from './components';
 import thunk from 'redux-thunk';
 import {createSocketMiddleware} from './socketMiddleware';
 //import {users} from '../server/db';
@@ -13,6 +14,7 @@ import {createLogger} from 'redux-logger';
 import {getPreloadedState} from './getPreloadedState';
 import createSagaMiddleware from 'redux-saga';
 import {currentUserStatusSaga} from './sagas/currentUserStatusSaga';
+import { initSagas } from './initSagas';
 const socketConfigOut = {
     UPDATE_STATUS:(data)=>({
         type: `UPDATE_USER_STATUS`,
@@ -26,6 +28,7 @@ const socketMiddleware = createSocketMiddleware(io) (socketConfigOut);
 initializeDB();
 
 import {reducer} from './reducers';
+import { DevTools } from './components/DevTools/DevTools';
 
 //const currentUser = users[0];
 //const defaultState = getDefaultState(currentUser);
@@ -42,7 +45,8 @@ const enhancer = compose(
         thunk,
         socketMiddleware,
         logger
-    )
+    ),
+    DevTools.instrument()
 );
 const store = createStore(reducer,getPreloadedState(),enhancer);
 
@@ -61,4 +65,4 @@ for (const key in socketConfigIn) {
 }
 
 export const getStore = ()=>store;
-sagaMiddleware.run(currentUserStatusSaga);
+initSagas(sagaMiddleware);

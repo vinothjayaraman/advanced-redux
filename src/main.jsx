@@ -3,7 +3,7 @@ import reactDOM from 'react-dom'
 import {getStore} from './getStore';
 import { App } from './App';
 import {OFFLINE,updateStatus} from './actions';
-
+import {DevTools} from './components';
 import {Provider} from 'react-redux';
 
 const store = getStore();
@@ -22,6 +22,7 @@ const render = (store)=>{
         reactDOM.render(
             <div>
                 <Main state={store.getState()}/>
+                <DevTools store={store}/>
             </div>,
             document.getElementById('AppContainer'));
 };
